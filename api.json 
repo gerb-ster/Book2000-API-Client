@@ -1,0 +1,489 @@
+{
+    "openapi": "3.1.0",
+    "info": {
+        "title": "Book2000App",
+        "version": "0.0.1"
+    },
+    "servers": [
+        {
+            "url": "http:\/\/book.home:8488\/api"
+        }
+    ],
+    "paths": {
+        "\/auth\/login": {
+            "post": {
+                "operationId": "authenticate.login",
+                "tags": [
+                    "Authenticate"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/components\/schemas\/LoginRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "401": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "const": "Unauthorised."
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "error": {
+                                                    "type": "string",
+                                                    "const": "Unauthorised"
+                                                }
+                                            },
+                                            "required": [
+                                                "error"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "message",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "string"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "const": "User login successfully."
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "data",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "$ref": "#\/components\/responses\/ValidationException"
+                    }
+                }
+            }
+        },
+        "\/auth\/logout": {
+            "get": {
+                "operationId": "authenticate.logout",
+                "tags": [
+                    "Authenticate"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "\/batches\/register": {
+            "post": {
+                "operationId": "batch.register",
+                "summary": "Register a batch",
+                "tags": [
+                    "Batch"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/components\/schemas\/BatchRegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0,
+                                            "additionalItems": false
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "message",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "transaction_id": {
+                                                    "type": "integer"
+                                                }
+                                            },
+                                            "required": [
+                                                "transaction_id"
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "const": "Inkoopkosten succesvol geregistreerd op de Winst- en Verliesrekening."
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "data",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#\/components\/responses\/ValidationException"
+                    }
+                }
+            }
+        },
+        "\/sales\/register": {
+            "post": {
+                "operationId": "sales.register",
+                "summary": "Register a sale",
+                "tags": [
+                    "Sales"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/components\/schemas\/SaleRegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "Foutafhandeling als er iets misgaat (bijv. ontbrekende grootboeken)",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0,
+                                            "additionalItems": false
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "message",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "5. Geef een succesvolle response terug met de gemaakte factuurgegevens",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "invoice_id": {
+                                                    "type": "integer"
+                                                },
+                                                "invoice_number": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "invoice_id",
+                                                "invoice_number"
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "const": "Order succesvol geboekt in de administratie."
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "data",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#\/components\/responses\/ValidationException"
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "BatchRegisterRequest": {
+                "type": "object",
+                "description": "Class RegisterRequest",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "maxLength": 1024
+                    },
+                    "total_euro": {
+                        "type": "number",
+                        "description": "Bijv. \"Partij 100 LP's Koningsdag\"",
+                        "minimum": 0.01
+                    },
+                    "purchase_date": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Bijv. 200.00"
+                    },
+                    "payment_method": {
+                        "$ref": "#\/components\/schemas\/PaymentMethod"
+                    }
+                },
+                "required": [
+                    "description",
+                    "total_euro",
+                    "purchase_date",
+                    "payment_method"
+                ],
+                "title": "BatchRegisterRequest"
+            },
+            "LoginRequest": {
+                "type": "object",
+                "description": "Class LoginRequest",
+                "properties": {
+                    "username": {
+                        "type": "string"
+                    },
+                    "password": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "username",
+                    "password"
+                ],
+                "title": "LoginRequest"
+            },
+            "PaymentMethod": {
+                "type": "string",
+                "enum": [
+                    "cash",
+                    "bank",
+                    "invoice"
+                ],
+                "title": "PaymentMethod"
+            },
+            "Platforms": {
+                "type": "string",
+                "enum": [
+                    "marktplaats",
+                    "vinted",
+                    "discogs",
+                    "direct",
+                    "other"
+                ],
+                "title": "Platforms"
+            },
+            "SaleRegisterRequest": {
+                "type": "object",
+                "description": "Class RegisterRequest",
+                "properties": {
+                    "platform": {
+                        "$ref": "#\/components\/schemas\/Platforms"
+                    },
+                    "gross_amount_cents": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "fee_cents": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "order_number": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "customer_name": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "customer_email": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "email"
+                    },
+                    "customer_address": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "maxLength": 2048
+                    }
+                },
+                "required": [
+                    "platform",
+                    "gross_amount_cents",
+                    "fee_cents",
+                    "order_number",
+                    "date",
+                    "customer_name"
+                ],
+                "title": "SaleRegisterRequest"
+            }
+        },
+        "responses": {
+            "ValidationException": {
+                "description": "Validation error",
+                "content": {
+                    "application\/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "Errors overview."
+                                },
+                                "errors": {
+                                    "type": "object",
+                                    "description": "A detailed description of each field that failed validation.",
+                                    "additionalProperties": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            },
+                            "required": [
+                                "message",
+                                "errors"
+                            ]
+                        }
+                    }
+                }
+            },
+            "AuthenticationException": {
+                "description": "Unauthenticated",
+                "content": {
+                    "application\/json": {
+                        "schema": {
+                            "type": "object",
+                            "properties": {
+                                "message": {
+                                    "type": "string",
+                                    "description": "Error overview."
+                                }
+                            },
+                            "required": [
+                                "message"
+                            ]
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
