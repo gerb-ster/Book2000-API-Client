@@ -310,6 +310,108 @@
                     }
                 }
             }
+        },
+        "\/transactions\/register": {
+            "post": {
+                "operationId": "transaction.register",
+                "summary": "Register a new transaction, its journal entries and an optional invoice",
+                "tags": [
+                    "Transaction"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/components\/schemas\/TransactionRegisterRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            },
+                                            "minItems": 0,
+                                            "maxItems": 0,
+                                            "additionalItems": false
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "message",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "3. Return the created transaction.",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "transaction_id": {
+                                                    "type": "integer"
+                                                },
+                                                "number": {
+                                                    "type": "string"
+                                                },
+                                                "uuid": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "transaction_id",
+                                                "number",
+                                                "uuid"
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "const": "Transactie succesvol geregistreerd."
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "data",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#\/components\/responses\/ValidationException"
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -432,6 +534,142 @@
                     "customer_name"
                 ],
                 "title": "SaleRegisterRequest"
+            },
+            "TransactionRegisterRequest": {
+                "type": "object",
+                "description": "Class TransactionRegisterRequest",
+                "properties": {
+                    "description": {
+                        "type": "string",
+                        "description": "The financial transaction itself.",
+                        "maxLength": 1024
+                    },
+                    "booking_date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "journal_entries": {
+                        "type": "array",
+                        "description": "The corresponding journal entries (double-entry bookkeeping).",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "ledger_code": {
+                                    "type": "string"
+                                },
+                                "amount_cents": {
+                                    "type": "integer"
+                                },
+                                "vat_box": {
+                                    "type": [
+                                        "string",
+                                        "null"
+                                    ],
+                                    "maxLength": 255
+                                }
+                            },
+                            "required": [
+                                "ledger_code",
+                                "amount_cents"
+                            ]
+                        },
+                        "minItems": 2
+                    },
+                    "invoice": {
+                        "type": "object",
+                        "description": "An optional invoice with its items.",
+                        "properties": {
+                            "contact_id": {
+                                "type": "integer"
+                            },
+                            "type": {
+                                "type": "string",
+                                "maxLength": 255
+                            },
+                            "invoice_reference": {
+                                "type": [
+                                    "string",
+                                    "null"
+                                ],
+                                "maxLength": 255
+                            },
+                            "invoice_date": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "due_date": {
+                                "type": "string",
+                                "format": "date-time"
+                            },
+                            "subtotal_cents": {
+                                "type": "integer"
+                            },
+                            "vat_cents": {
+                                "type": "integer"
+                            },
+                            "total_cents": {
+                                "type": "integer"
+                            },
+                            "status": {
+                                "type": "string",
+                                "maxLength": 255
+                            },
+                            "items": {
+                                "type": "array",
+                                "description": "The optional invoice items (required as soon as an invoice is passed).",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "description": {
+                                            "type": "string",
+                                            "maxLength": 1024
+                                        },
+                                        "quantity": {
+                                            "type": "number",
+                                            "minimum": 0
+                                        },
+                                        "unit_price_cents": {
+                                            "type": "integer"
+                                        },
+                                        "vat_rate": {
+                                            "type": "number",
+                                            "minimum": 0
+                                        },
+                                        "subtotal_cents": {
+                                            "type": "integer"
+                                        },
+                                        "vat_cents": {
+                                            "type": "integer"
+                                        },
+                                        "total_cents": {
+                                            "type": "integer"
+                                        },
+                                        "is_margin_goods": {
+                                            "type": "boolean"
+                                        }
+                                    },
+                                    "required": [
+                                        "description",
+                                        "quantity",
+                                        "unit_price_cents",
+                                        "vat_rate",
+                                        "subtotal_cents",
+                                        "vat_cents",
+                                        "total_cents"
+                                    ]
+                                },
+                                "minItems": 1
+                            }
+                        }
+                    }
+                },
+                "required": [
+                    "description",
+                    "booking_date",
+                    "journal_entries",
+                    "invoice"
+                ],
+                "title": "TransactionRegisterRequest"
             }
         },
         "responses": {
