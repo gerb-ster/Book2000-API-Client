@@ -67,7 +67,8 @@ class TransactionRegisterRequestInvoice implements ModelInterface, ArrayAccess, 
         'vat_cents' => 'int',
         'total_cents' => 'int',
         'status' => 'string',
-        'items' => '\Book2000\ApiClient\Model\TransactionRegisterRequestInvoiceItemsInner[]'
+        'items' => '\Book2000\ApiClient\Model\TransactionRegisterRequestInvoiceItemsInner[]',
+        'attachments' => '\Book2000\ApiClient\Model\TransactionRegisterRequestInvoiceAttachmentsInner[]'
     ];
 
     /**
@@ -87,7 +88,8 @@ class TransactionRegisterRequestInvoice implements ModelInterface, ArrayAccess, 
         'vat_cents' => null,
         'total_cents' => null,
         'status' => null,
-        'items' => null
+        'items' => null,
+        'attachments' => null
     ];
 
     /**
@@ -105,7 +107,8 @@ class TransactionRegisterRequestInvoice implements ModelInterface, ArrayAccess, 
         'vat_cents' => false,
         'total_cents' => false,
         'status' => false,
-        'items' => false
+        'items' => false,
+        'attachments' => true
     ];
 
     /**
@@ -203,7 +206,8 @@ class TransactionRegisterRequestInvoice implements ModelInterface, ArrayAccess, 
         'vat_cents' => 'vat_cents',
         'total_cents' => 'total_cents',
         'status' => 'status',
-        'items' => 'items'
+        'items' => 'items',
+        'attachments' => 'attachments'
     ];
 
     /**
@@ -221,7 +225,8 @@ class TransactionRegisterRequestInvoice implements ModelInterface, ArrayAccess, 
         'vat_cents' => 'setVatCents',
         'total_cents' => 'setTotalCents',
         'status' => 'setStatus',
-        'items' => 'setItems'
+        'items' => 'setItems',
+        'attachments' => 'setAttachments'
     ];
 
     /**
@@ -239,7 +244,8 @@ class TransactionRegisterRequestInvoice implements ModelInterface, ArrayAccess, 
         'vat_cents' => 'getVatCents',
         'total_cents' => 'getTotalCents',
         'status' => 'getStatus',
-        'items' => 'getItems'
+        'items' => 'getItems',
+        'attachments' => 'getAttachments'
     ];
 
     /**
@@ -309,6 +315,7 @@ class TransactionRegisterRequestInvoice implements ModelInterface, ArrayAccess, 
         $this->setIfExists('total_cents', $data ?? [], null);
         $this->setIfExists('status', $data ?? [], null);
         $this->setIfExists('items', $data ?? [], null);
+        $this->setIfExists('attachments', $data ?? [], null);
     }
 
     /**
@@ -658,6 +665,40 @@ class TransactionRegisterRequestInvoice implements ModelInterface, ArrayAccess, 
             throw new \InvalidArgumentException('invalid length for $items when calling TransactionRegisterRequestInvoice., number of items must be greater than or equal to 1.');
         }
         $this->container['items'] = $items;
+
+        return $this;
+    }
+
+    /**
+     * Gets attachments
+     *
+     * @return \Book2000\ApiClient\Model\TransactionRegisterRequestInvoiceAttachmentsInner[]|null
+     */
+    public function getAttachments()
+    {
+        return $this->container['attachments'];
+    }
+
+    /**
+     * Sets attachments
+     *
+     * @param \Book2000\ApiClient\Model\TransactionRegisterRequestInvoiceAttachmentsInner[]|null $attachments Optional invoice attachments, sent as one or more base64 encoded files.
+     *
+     * @return self
+     */
+    public function setAttachments($attachments)
+    {
+        if (is_null($attachments)) {
+            array_push($this->openAPINullablesSetToNull, 'attachments');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('attachments', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['attachments'] = $attachments;
 
         return $this;
     }

@@ -2,7 +2,7 @@
 
 
 
-All URIs are relative to http://book.home:8488/api, except if the operation defines another base path.
+All URIs are relative to http://book2000.ootw.development/api, except if the operation defines another base path.
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |

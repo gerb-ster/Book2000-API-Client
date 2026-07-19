@@ -168,4 +168,13 @@ class TransactionRegisterRequestInvoiceTest extends TestCase
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
+
+    /**
+     * Test attribute "attachments"
+     */
+    public function testPropertyAttachments()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
 }

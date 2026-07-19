@@ -6,7 +6,7 @@
     },
     "servers": [
         {
-            "url": "http:\/\/book.home:8488\/api"
+            "url": "http:\/\/book2000.ootw.development\/api"
         }
     ],
     "paths": {
@@ -659,6 +659,29 @@
                                     ]
                                 },
                                 "minItems": 1
+                            },
+                            "attachments": {
+                                "type": [
+                                    "array",
+                                    "null"
+                                ],
+                                "description": "Optional invoice attachments, sent as one or more base64 encoded files.",
+                                "items": {
+                                    "type": "object",
+                                    "properties": {
+                                        "filename": {
+                                            "type": "string",
+                                            "maxLength": 255
+                                        },
+                                        "content": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "required": [
+                                        "filename",
+                                        "content"
+                                    ]
+                                }
                             }
                         }
                     }
