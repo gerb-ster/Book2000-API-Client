@@ -24,11 +24,15 @@ Register a batch
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer authorization: http
+$config = Book2000\ApiClient\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Book2000\ApiClient\Api\BatchApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 $batch_register_request = new \Book2000\ApiClient\Model\BatchRegisterRequest(); // \Book2000\ApiClient\Model\BatchRegisterRequest
 
@@ -52,7 +56,7 @@ try {
 
 ### Authorization
 
-No authorization required
+[http](../../README.md#http)
 
 ### HTTP request headers
 

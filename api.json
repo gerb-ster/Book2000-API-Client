@@ -2,11 +2,16 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Book2000App",
-        "version": "0.0.1"
+        "version": "1.3.0"
     },
     "servers": [
         {
             "url": "http:\/\/book2000.ootw.development\/api"
+        }
+    ],
+    "security": [
+        {
+            "http": []
         }
     ],
     "paths": {
@@ -93,7 +98,8 @@
                     "422": {
                         "$ref": "#\/components\/responses\/ValidationException"
                     }
-                }
+                },
+                "security": []
             }
         },
         "\/auth\/logout": {
@@ -415,6 +421,12 @@
         }
     },
     "components": {
+        "securitySchemes": {
+            "http": {
+                "type": "http",
+                "scheme": "bearer"
+            }
+        },
         "schemas": {
             "BatchRegisterRequest": {
                 "type": "object",

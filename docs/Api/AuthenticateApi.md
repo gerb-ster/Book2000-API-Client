@@ -79,11 +79,15 @@ authenticateLogout(): object
 require_once(__DIR__ . '/vendor/autoload.php');
 
 
+// Configure Bearer authorization: http
+$config = Book2000\ApiClient\Configuration::getDefaultConfiguration()->setAccessToken('YOUR_ACCESS_TOKEN');
+
 
 $apiInstance = new Book2000\ApiClient\Api\AuthenticateApi(
     // If you want use custom http client, pass your client which implements `GuzzleHttp\ClientInterface`.
     // This is optional, `GuzzleHttp\Client` will be used as default.
-    new GuzzleHttp\Client()
+    new GuzzleHttp\Client(),
+    $config
 );
 
 try {
@@ -104,7 +108,7 @@ This endpoint does not need any parameter.
 
 ### Authorization
 
-No authorization required
+[http](../../README.md#http)
 
 ### HTTP request headers
 
