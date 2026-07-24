@@ -1,6 +1,6 @@
 <?php
 /**
- * AuthenticateLogin401ResponseDataTest
+ * TransactionRegisterRequestInvoiceContactTest
  *
  * PHP version 8.1
  *
@@ -31,15 +31,15 @@ namespace Book2000\ApiClient\Test\Model;
 use PHPUnit\Framework\TestCase;
 
 /**
- * AuthenticateLogin401ResponseDataTest Class Doc Comment
+ * TransactionRegisterRequestInvoiceContactTest Class Doc Comment
  *
  * @category    Class
- * @description AuthenticateLogin401ResponseData
+ * @description TransactionRegisterRequestInvoiceContact
  * @package     Book2000\ApiClient
  * @author      OpenAPI Generator team
  * @link        https://openapi-generator.tech
  */
-class AuthenticateLogin401ResponseDataTest extends TestCase
+class TransactionRegisterRequestInvoiceContactTest extends TestCase
 {
 
     /**
@@ -71,18 +71,72 @@ class AuthenticateLogin401ResponseDataTest extends TestCase
     }
 
     /**
-     * Test "AuthenticateLogin401ResponseData"
+     * Test "TransactionRegisterRequestInvoiceContact"
      */
-    public function testAuthenticateLogin401ResponseData()
+    public function testTransactionRegisterRequestInvoiceContact()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');
     }
 
     /**
-     * Test attribute "error"
+     * Test attribute "name"
      */
-    public function testPropertyError()
+    public function testPropertyName()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "type"
+     */
+    public function testPropertyType()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "email"
+     */
+    public function testPropertyEmail()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "address"
+     */
+    public function testPropertyAddress()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "coc_number"
+     */
+    public function testPropertyCocNumber()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "vat_number"
+     */
+    public function testPropertyVatNumber()
+    {
+        // TODO: implement
+        self::markTestIncomplete('Not implemented');
+    }
+
+    /**
+     * Test attribute "iban"
+     */
+    public function testPropertyIban()
     {
         // TODO: implement
         self::markTestIncomplete('Not implemented');

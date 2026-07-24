@@ -29,6 +29,7 @@ docs/Model/TransactionRegister500Response.md
 docs/Model/TransactionRegisterRequest.md
 docs/Model/TransactionRegisterRequestInvoice.md
 docs/Model/TransactionRegisterRequestInvoiceAttachmentsInner.md
+docs/Model/TransactionRegisterRequestInvoiceContact.md
 docs/Model/TransactionRegisterRequestInvoiceItemsInner.md
 docs/Model/TransactionRegisterRequestJournalEntriesInner.md
 git_push.sh
@@ -63,6 +64,7 @@ src/Model/TransactionRegister500Response.php
 src/Model/TransactionRegisterRequest.php
 src/Model/TransactionRegisterRequestInvoice.php
 src/Model/TransactionRegisterRequestInvoiceAttachmentsInner.php
+src/Model/TransactionRegisterRequestInvoiceContact.php
 src/Model/TransactionRegisterRequestInvoiceItemsInner.php
 src/Model/TransactionRegisterRequestJournalEntriesInner.php
 src/ObjectSerializer.php
@@ -89,6 +91,7 @@ test/Model/TransactionRegister200ResponseDataTest.php
 test/Model/TransactionRegister200ResponseTest.php
 test/Model/TransactionRegister500ResponseTest.php
 test/Model/TransactionRegisterRequestInvoiceAttachmentsInnerTest.php
+test/Model/TransactionRegisterRequestInvoiceContactTest.php
 test/Model/TransactionRegisterRequestInvoiceItemsInnerTest.php
 test/Model/TransactionRegisterRequestInvoiceTest.php
 test/Model/TransactionRegisterRequestJournalEntriesInnerTest.php

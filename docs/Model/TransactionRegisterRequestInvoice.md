@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**contact_id** | **int** |  | [optional]
+**contact_id** | **int** | The invoice contact: either an existing contact (contact_id) or a new contact to create (contact). | [optional]
+**contact** | [**\Book2000\ApiClient\Model\TransactionRegisterRequestInvoiceContact**](TransactionRegisterRequestInvoiceContact.md) |  | [optional]
 **type** | **string** |  | [optional]
 **invoice_reference** | **string** |  | [optional]
 **invoice_date** | **\DateTime** |  | [optional]

@@ -1,6 +1,6 @@
 <?php
 /**
- * SaleRegisterRequest
+ * TransactionRegisterRequestInvoiceContact
  *
  * PHP version 8.1
  *
@@ -32,16 +32,15 @@ use \ArrayAccess;
 use \Book2000\ApiClient\ObjectSerializer;
 
 /**
- * SaleRegisterRequest Class Doc Comment
+ * TransactionRegisterRequestInvoiceContact Class Doc Comment
  *
  * @category Class
- * @description Class RegisterRequest
  * @package  Book2000\ApiClient
  * @author   OpenAPI Generator team
  * @link     https://openapi-generator.tech
  * @implements \ArrayAccess<string, mixed>
  */
-class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializable
+class TransactionRegisterRequestInvoiceContact implements ModelInterface, ArrayAccess, \JsonSerializable
 {
     public const DISCRIMINATOR = null;
 
@@ -50,7 +49,7 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      *
      * @var string
      */
-    protected static $openAPIModelName = 'SaleRegisterRequest';
+    protected static $openAPIModelName = 'TransactionRegisterRequest_invoice_contact';
 
     /**
      * Array of property to type mappings. Used for (de)serialization
@@ -58,14 +57,13 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $openAPITypes = [
-        'platform' => '\Book2000\ApiClient\Model\Platforms',
-        'gross_amount_cents' => 'int',
-        'fee_cents' => 'int',
-        'order_number' => 'string',
-        'date' => '\DateTime',
-        'customer_name' => 'string',
-        'customer_email' => 'string',
-        'customer_address' => 'string'
+        'name' => 'string',
+        'type' => 'string',
+        'email' => 'string',
+        'address' => 'string',
+        'coc_number' => 'string',
+        'vat_number' => 'string',
+        'iban' => 'string'
     ];
 
     /**
@@ -76,14 +74,13 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      * @psalm-var array<string, string|null>
      */
     protected static $openAPIFormats = [
-        'platform' => null,
-        'gross_amount_cents' => null,
-        'fee_cents' => null,
-        'order_number' => null,
-        'date' => 'date-time',
-        'customer_name' => null,
-        'customer_email' => 'email',
-        'customer_address' => null
+        'name' => null,
+        'type' => null,
+        'email' => 'email',
+        'address' => null,
+        'coc_number' => null,
+        'vat_number' => null,
+        'iban' => null
     ];
 
     /**
@@ -92,14 +89,13 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var boolean[]
      */
     protected static array $openAPINullables = [
-        'platform' => false,
-        'gross_amount_cents' => false,
-        'fee_cents' => false,
-        'order_number' => false,
-        'date' => false,
-        'customer_name' => false,
-        'customer_email' => true,
-        'customer_address' => true
+        'name' => false,
+        'type' => false,
+        'email' => true,
+        'address' => true,
+        'coc_number' => true,
+        'vat_number' => true,
+        'iban' => true
     ];
 
     /**
@@ -188,14 +184,13 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $attributeMap = [
-        'platform' => 'platform',
-        'gross_amount_cents' => 'gross_amount_cents',
-        'fee_cents' => 'fee_cents',
-        'order_number' => 'order_number',
-        'date' => 'date',
-        'customer_name' => 'customer_name',
-        'customer_email' => 'customer_email',
-        'customer_address' => 'customer_address'
+        'name' => 'name',
+        'type' => 'type',
+        'email' => 'email',
+        'address' => 'address',
+        'coc_number' => 'coc_number',
+        'vat_number' => 'vat_number',
+        'iban' => 'iban'
     ];
 
     /**
@@ -204,14 +199,13 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $setters = [
-        'platform' => 'setPlatform',
-        'gross_amount_cents' => 'setGrossAmountCents',
-        'fee_cents' => 'setFeeCents',
-        'order_number' => 'setOrderNumber',
-        'date' => 'setDate',
-        'customer_name' => 'setCustomerName',
-        'customer_email' => 'setCustomerEmail',
-        'customer_address' => 'setCustomerAddress'
+        'name' => 'setName',
+        'type' => 'setType',
+        'email' => 'setEmail',
+        'address' => 'setAddress',
+        'coc_number' => 'setCocNumber',
+        'vat_number' => 'setVatNumber',
+        'iban' => 'setIban'
     ];
 
     /**
@@ -220,14 +214,13 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      * @var string[]
      */
     protected static $getters = [
-        'platform' => 'getPlatform',
-        'gross_amount_cents' => 'getGrossAmountCents',
-        'fee_cents' => 'getFeeCents',
-        'order_number' => 'getOrderNumber',
-        'date' => 'getDate',
-        'customer_name' => 'getCustomerName',
-        'customer_email' => 'getCustomerEmail',
-        'customer_address' => 'getCustomerAddress'
+        'name' => 'getName',
+        'type' => 'getType',
+        'email' => 'getEmail',
+        'address' => 'getAddress',
+        'coc_number' => 'getCocNumber',
+        'vat_number' => 'getVatNumber',
+        'iban' => 'getIban'
     ];
 
     /**
@@ -271,6 +264,21 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
         return self::$openAPIModelName;
     }
 
+    public const TYPE_CUSTOMER = 'customer';
+    public const TYPE_SUPPLIER = 'supplier';
+
+    /**
+     * Gets allowable values of the enum
+     *
+     * @return string[]
+     */
+    public function getTypeAllowableValues()
+    {
+        return [
+            self::TYPE_CUSTOMER,
+            self::TYPE_SUPPLIER,
+        ];
+    }
 
     /**
      * Associative array for storing property values
@@ -287,14 +295,13 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
      */
     public function __construct(?array $data = null)
     {
-        $this->setIfExists('platform', $data ?? [], null);
-        $this->setIfExists('gross_amount_cents', $data ?? [], null);
-        $this->setIfExists('fee_cents', $data ?? [], null);
-        $this->setIfExists('order_number', $data ?? [], null);
-        $this->setIfExists('date', $data ?? [], null);
-        $this->setIfExists('customer_name', $data ?? [], null);
-        $this->setIfExists('customer_email', $data ?? [], null);
-        $this->setIfExists('customer_address', $data ?? [], null);
+        $this->setIfExists('name', $data ?? [], null);
+        $this->setIfExists('type', $data ?? [], null);
+        $this->setIfExists('email', $data ?? [], null);
+        $this->setIfExists('address', $data ?? [], null);
+        $this->setIfExists('coc_number', $data ?? [], null);
+        $this->setIfExists('vat_number', $data ?? [], null);
+        $this->setIfExists('iban', $data ?? [], null);
     }
 
     /**
@@ -324,42 +331,29 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
     {
         $invalidProperties = [];
 
-        if ($this->container['platform'] === null) {
-            $invalidProperties[] = "'platform' can't be null";
-        }
-        if ($this->container['gross_amount_cents'] === null) {
-            $invalidProperties[] = "'gross_amount_cents' can't be null";
-        }
-        if (($this->container['gross_amount_cents'] < 0)) {
-            $invalidProperties[] = "invalid value for 'gross_amount_cents', must be bigger than or equal to 0.";
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) > 50)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be smaller than or equal to 50.";
         }
 
-        if ($this->container['fee_cents'] === null) {
-            $invalidProperties[] = "'fee_cents' can't be null";
-        }
-        if (($this->container['fee_cents'] < 0)) {
-            $invalidProperties[] = "invalid value for 'fee_cents', must be bigger than or equal to 0.";
+        if (!is_null($this->container['name']) && (mb_strlen($this->container['name']) < 3)) {
+            $invalidProperties[] = "invalid value for 'name', the character length must be bigger than or equal to 3.";
         }
 
-        if ($this->container['order_number'] === null) {
-            $invalidProperties[] = "'order_number' can't be null";
-        }
-        if ((mb_strlen($this->container['order_number']) > 255)) {
-            $invalidProperties[] = "invalid value for 'order_number', the character length must be smaller than or equal to 255.";
-        }
-
-        if ($this->container['date'] === null) {
-            $invalidProperties[] = "'date' can't be null";
-        }
-        if ($this->container['customer_name'] === null) {
-            $invalidProperties[] = "'customer_name' can't be null";
-        }
-        if ((mb_strlen($this->container['customer_name']) > 255)) {
-            $invalidProperties[] = "invalid value for 'customer_name', the character length must be smaller than or equal to 255.";
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!is_null($this->container['type']) && !in_array($this->container['type'], $allowedValues, true)) {
+            $invalidProperties[] = sprintf(
+                "invalid value '%s' for 'type', must be one of '%s'",
+                $this->container['type'],
+                implode("', '", $allowedValues)
+            );
         }
 
-        if (!is_null($this->container['customer_address']) && (mb_strlen($this->container['customer_address']) > 2048)) {
-            $invalidProperties[] = "invalid value for 'customer_address', the character length must be smaller than or equal to 2048.";
+        if (!is_null($this->container['address']) && (mb_strlen($this->container['address']) > 512)) {
+            $invalidProperties[] = "invalid value for 'address', the character length must be smaller than or equal to 512.";
+        }
+
+        if (!is_null($this->container['address']) && (mb_strlen($this->container['address']) < 3)) {
+            $invalidProperties[] = "invalid value for 'address', the character length must be bigger than or equal to 3.";
         }
 
         return $invalidProperties;
@@ -378,251 +372,249 @@ class SaleRegisterRequest implements ModelInterface, ArrayAccess, \JsonSerializa
 
 
     /**
-     * Gets platform
-     *
-     * @return \Book2000\ApiClient\Model\Platforms
-     */
-    public function getPlatform()
-    {
-        return $this->container['platform'];
-    }
-
-    /**
-     * Sets platform
-     *
-     * @param \Book2000\ApiClient\Model\Platforms $platform platform
-     *
-     * @return self
-     */
-    public function setPlatform($platform)
-    {
-        if (is_null($platform)) {
-            throw new \InvalidArgumentException('non-nullable platform cannot be null');
-        }
-        $this->container['platform'] = $platform;
-
-        return $this;
-    }
-
-    /**
-     * Gets gross_amount_cents
-     *
-     * @return int
-     */
-    public function getGrossAmountCents()
-    {
-        return $this->container['gross_amount_cents'];
-    }
-
-    /**
-     * Sets gross_amount_cents
-     *
-     * @param int $gross_amount_cents gross_amount_cents
-     *
-     * @return self
-     */
-    public function setGrossAmountCents($gross_amount_cents)
-    {
-        if (is_null($gross_amount_cents)) {
-            throw new \InvalidArgumentException('non-nullable gross_amount_cents cannot be null');
-        }
-        if (($gross_amount_cents < 0)) {
-            throw new \InvalidArgumentException('invalid value for $gross_amount_cents when calling SaleRegisterRequest., must be bigger than or equal to 0.');
-        }
-
-        $this->container['gross_amount_cents'] = $gross_amount_cents;
-
-        return $this;
-    }
-
-    /**
-     * Gets fee_cents
-     *
-     * @return int
-     */
-    public function getFeeCents()
-    {
-        return $this->container['fee_cents'];
-    }
-
-    /**
-     * Sets fee_cents
-     *
-     * @param int $fee_cents fee_cents
-     *
-     * @return self
-     */
-    public function setFeeCents($fee_cents)
-    {
-        if (is_null($fee_cents)) {
-            throw new \InvalidArgumentException('non-nullable fee_cents cannot be null');
-        }
-        if (($fee_cents < 0)) {
-            throw new \InvalidArgumentException('invalid value for $fee_cents when calling SaleRegisterRequest., must be bigger than or equal to 0.');
-        }
-
-        $this->container['fee_cents'] = $fee_cents;
-
-        return $this;
-    }
-
-    /**
-     * Gets order_number
-     *
-     * @return string
-     */
-    public function getOrderNumber()
-    {
-        return $this->container['order_number'];
-    }
-
-    /**
-     * Sets order_number
-     *
-     * @param string $order_number order_number
-     *
-     * @return self
-     */
-    public function setOrderNumber($order_number)
-    {
-        if (is_null($order_number)) {
-            throw new \InvalidArgumentException('non-nullable order_number cannot be null');
-        }
-        if ((mb_strlen($order_number) > 255)) {
-            throw new \InvalidArgumentException('invalid length for $order_number when calling SaleRegisterRequest., must be smaller than or equal to 255.');
-        }
-
-        $this->container['order_number'] = $order_number;
-
-        return $this;
-    }
-
-    /**
-     * Gets date
-     *
-     * @return \DateTime
-     */
-    public function getDate()
-    {
-        return $this->container['date'];
-    }
-
-    /**
-     * Sets date
-     *
-     * @param \DateTime $date date
-     *
-     * @return self
-     */
-    public function setDate($date)
-    {
-        if (is_null($date)) {
-            throw new \InvalidArgumentException('non-nullable date cannot be null');
-        }
-        $this->container['date'] = $date;
-
-        return $this;
-    }
-
-    /**
-     * Gets customer_name
-     *
-     * @return string
-     */
-    public function getCustomerName()
-    {
-        return $this->container['customer_name'];
-    }
-
-    /**
-     * Sets customer_name
-     *
-     * @param string $customer_name customer_name
-     *
-     * @return self
-     */
-    public function setCustomerName($customer_name)
-    {
-        if (is_null($customer_name)) {
-            throw new \InvalidArgumentException('non-nullable customer_name cannot be null');
-        }
-        if ((mb_strlen($customer_name) > 255)) {
-            throw new \InvalidArgumentException('invalid length for $customer_name when calling SaleRegisterRequest., must be smaller than or equal to 255.');
-        }
-
-        $this->container['customer_name'] = $customer_name;
-
-        return $this;
-    }
-
-    /**
-     * Gets customer_email
+     * Gets name
      *
      * @return string|null
      */
-    public function getCustomerEmail()
+    public function getName()
     {
-        return $this->container['customer_email'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets customer_email
+     * Sets name
      *
-     * @param string|null $customer_email customer_email
+     * @param string|null $name name
      *
      * @return self
      */
-    public function setCustomerEmail($customer_email)
+    public function setName($name)
     {
-        if (is_null($customer_email)) {
-            array_push($this->openAPINullablesSetToNull, 'customer_email');
+        if (is_null($name)) {
+            throw new \InvalidArgumentException('non-nullable name cannot be null');
+        }
+        if ((mb_strlen($name) > 50)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling TransactionRegisterRequestInvoiceContact., must be smaller than or equal to 50.');
+        }
+        if ((mb_strlen($name) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $name when calling TransactionRegisterRequestInvoiceContact., must be bigger than or equal to 3.');
+        }
+
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets type
+     *
+     * @return string|null
+     */
+    public function getType()
+    {
+        return $this->container['type'];
+    }
+
+    /**
+     * Sets type
+     *
+     * @param string|null $type type
+     *
+     * @return self
+     */
+    public function setType($type)
+    {
+        if (is_null($type)) {
+            throw new \InvalidArgumentException('non-nullable type cannot be null');
+        }
+        $allowedValues = $this->getTypeAllowableValues();
+        if (!in_array($type, $allowedValues, true)) {
+            throw new \InvalidArgumentException(
+                sprintf(
+                    "Invalid value '%s' for 'type', must be one of '%s'",
+                    $type,
+                    implode("', '", $allowedValues)
+                )
+            );
+        }
+        $this->container['type'] = $type;
+
+        return $this;
+    }
+
+    /**
+     * Gets email
+     *
+     * @return string|null
+     */
+    public function getEmail()
+    {
+        return $this->container['email'];
+    }
+
+    /**
+     * Sets email
+     *
+     * @param string|null $email email
+     *
+     * @return self
+     */
+    public function setEmail($email)
+    {
+        if (is_null($email)) {
+            array_push($this->openAPINullablesSetToNull, 'email');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('customer_email', $nullablesSetToNull);
+            $index = array_search('email', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        $this->container['customer_email'] = $customer_email;
+        $this->container['email'] = $email;
 
         return $this;
     }
 
     /**
-     * Gets customer_address
+     * Gets address
      *
      * @return string|null
      */
-    public function getCustomerAddress()
+    public function getAddress()
     {
-        return $this->container['customer_address'];
+        return $this->container['address'];
     }
 
     /**
-     * Sets customer_address
+     * Sets address
      *
-     * @param string|null $customer_address customer_address
+     * @param string|null $address address
      *
      * @return self
      */
-    public function setCustomerAddress($customer_address)
+    public function setAddress($address)
     {
-        if (is_null($customer_address)) {
-            array_push($this->openAPINullablesSetToNull, 'customer_address');
+        if (is_null($address)) {
+            array_push($this->openAPINullablesSetToNull, 'address');
         } else {
             $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
-            $index = array_search('customer_address', $nullablesSetToNull);
+            $index = array_search('address', $nullablesSetToNull);
             if ($index !== FALSE) {
                 unset($nullablesSetToNull[$index]);
                 $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
             }
         }
-        if (!is_null($customer_address) && (mb_strlen($customer_address) > 2048)) {
-            throw new \InvalidArgumentException('invalid length for $customer_address when calling SaleRegisterRequest., must be smaller than or equal to 2048.');
+        if (!is_null($address) && (mb_strlen($address) > 512)) {
+            throw new \InvalidArgumentException('invalid length for $address when calling TransactionRegisterRequestInvoiceContact., must be smaller than or equal to 512.');
+        }
+        if (!is_null($address) && (mb_strlen($address) < 3)) {
+            throw new \InvalidArgumentException('invalid length for $address when calling TransactionRegisterRequestInvoiceContact., must be bigger than or equal to 3.');
         }
 
-        $this->container['customer_address'] = $customer_address;
+        $this->container['address'] = $address;
+
+        return $this;
+    }
+
+    /**
+     * Gets coc_number
+     *
+     * @return string|null
+     */
+    public function getCocNumber()
+    {
+        return $this->container['coc_number'];
+    }
+
+    /**
+     * Sets coc_number
+     *
+     * @param string|null $coc_number coc_number
+     *
+     * @return self
+     */
+    public function setCocNumber($coc_number)
+    {
+        if (is_null($coc_number)) {
+            array_push($this->openAPINullablesSetToNull, 'coc_number');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('coc_number', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['coc_number'] = $coc_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets vat_number
+     *
+     * @return string|null
+     */
+    public function getVatNumber()
+    {
+        return $this->container['vat_number'];
+    }
+
+    /**
+     * Sets vat_number
+     *
+     * @param string|null $vat_number vat_number
+     *
+     * @return self
+     */
+    public function setVatNumber($vat_number)
+    {
+        if (is_null($vat_number)) {
+            array_push($this->openAPINullablesSetToNull, 'vat_number');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('vat_number', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['vat_number'] = $vat_number;
+
+        return $this;
+    }
+
+    /**
+     * Gets iban
+     *
+     * @return string|null
+     */
+    public function getIban()
+    {
+        return $this->container['iban'];
+    }
+
+    /**
+     * Sets iban
+     *
+     * @param string|null $iban iban
+     *
+     * @return self
+     */
+    public function setIban($iban)
+    {
+        if (is_null($iban)) {
+            array_push($this->openAPINullablesSetToNull, 'iban');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('iban', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
+        }
+        $this->container['iban'] = $iban;
 
         return $this;
     }
