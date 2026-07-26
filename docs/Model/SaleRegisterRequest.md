@@ -12,5 +12,6 @@ Name | Type | Description | Notes
 **customer_name** | **string** |  |
 **customer_email** | **string** |  | [optional]
 **customer_address** | **string** |  | [optional]
+**payment_method** | **string** |  |
 
 [[Back to Model list]](../../README.md#models) [[Back to API list]](../../README.md#endpoints) [[Back to README]](../../README.md)

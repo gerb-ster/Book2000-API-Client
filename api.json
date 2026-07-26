@@ -2,7 +2,7 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Book2000App",
-        "version": "1.4.0"
+        "version": "1.4.1"
     },
     "servers": [
         {
@@ -527,7 +527,7 @@
                             "string",
                             "null"
                         ],
-                        "format": "email"
+                        "maxLength": 255
                     },
                     "customer_address": {
                         "type": [
@@ -535,6 +535,10 @@
                             "null"
                         ],
                         "maxLength": 2048
+                    },
+                    "payment_method": {
+                        "type": "string",
+                        "maxLength": 255
                     }
                 },
                 "required": [
@@ -543,7 +547,8 @@
                     "fee_cents",
                     "order_number",
                     "date",
-                    "customer_name"
+                    "customer_name",
+                    "payment_method"
                 ],
                 "title": "SaleRegisterRequest"
             },
