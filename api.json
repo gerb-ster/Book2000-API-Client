@@ -2,7 +2,7 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Book2000App",
-        "version": "1.4.1"
+        "version": "1.5.0"
     },
     "servers": [
         {
@@ -115,6 +115,116 @@
                             "application\/json": {
                                 "schema": {
                                     "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    }
+                }
+            }
+        },
+        "\/balance\/audit": {
+            "post": {
+                "operationId": "balance.audit",
+                "tags": [
+                    "Balance"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "globalCheck": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "in_balance": {
+                                                            "type": "boolean"
+                                                        },
+                                                        "difference_cents": {},
+                                                        "difference_euro": {
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "required": [
+                                                        "in_balance",
+                                                        "difference_cents",
+                                                        "difference_euro"
+                                                    ]
+                                                },
+                                                "unbalancedTransactions": {
+                                                    "type": "array",
+                                                    "description": "Zoek transacties waarbij de som van de regels NIET gelijk is aan 0",
+                                                    "items": {
+                                                        "type": "object",
+                                                        "properties": {
+                                                            "transaction_id": {
+                                                                "type": "string"
+                                                            },
+                                                            "description": {
+                                                                "anyOf": [
+                                                                    {
+                                                                        "type": "string"
+                                                                    },
+                                                                    {
+                                                                        "type": "string",
+                                                                        "enum": [
+                                                                            "Onbekende transactie"
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "booking_date": {
+                                                                "anyOf": [
+                                                                    {
+                                                                        "type": "string"
+                                                                    },
+                                                                    {
+                                                                        "type": "string",
+                                                                        "enum": [
+                                                                            "-"
+                                                                        ]
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "imbalance_euro": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "required": [
+                                                            "transaction_id",
+                                                            "description",
+                                                            "booking_date",
+                                                            "imbalance_euro"
+                                                        ]
+                                                    }
+                                                }
+                                            },
+                                            "required": [
+                                                "globalCheck",
+                                                "unbalancedTransactions"
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "const": "Balance Audit Result"
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "data",
+                                        "message"
+                                    ]
                                 }
                             }
                         }
