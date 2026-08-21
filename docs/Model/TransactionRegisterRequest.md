@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**description** | **string** | The financial transaction itself. |
+**title** | **string** | The financial transaction itself. |
+**description** | **string** |  |
 **booking_date** | **\DateTime** |  |
 **journal_entries** | [**\Book2000\ApiClient\Model\TransactionRegisterRequestJournalEntriesInner[]**](TransactionRegisterRequestJournalEntriesInner.md) | The corresponding journal entries (double-entry bookkeeping). |
 **invoice** | [**\Book2000\ApiClient\Model\TransactionRegisterRequestInvoice**](TransactionRegisterRequestInvoice.md) |  |

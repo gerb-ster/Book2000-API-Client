@@ -16,8 +16,6 @@ docs/Model/BalanceAudit200Response.md
 docs/Model/BalanceAudit200ResponseData.md
 docs/Model/BalanceAudit200ResponseDataGlobalCheck.md
 docs/Model/BalanceAudit200ResponseDataUnbalancedTransactionsInner.md
-docs/Model/BalanceAudit200ResponseDataUnbalancedTransactionsInnerBookingDate.md
-docs/Model/BalanceAudit200ResponseDataUnbalancedTransactionsInnerDescription.md
 docs/Model/BatchRegister200Response.md
 docs/Model/BatchRegister200ResponseData.md
 docs/Model/BatchRegister500Response.md
@@ -57,8 +55,6 @@ src/Model/BalanceAudit200Response.php
 src/Model/BalanceAudit200ResponseData.php
 src/Model/BalanceAudit200ResponseDataGlobalCheck.php
 src/Model/BalanceAudit200ResponseDataUnbalancedTransactionsInner.php
-src/Model/BalanceAudit200ResponseDataUnbalancedTransactionsInnerBookingDate.php
-src/Model/BalanceAudit200ResponseDataUnbalancedTransactionsInnerDescription.php
 src/Model/BatchRegister200Response.php
 src/Model/BatchRegister200ResponseData.php
 src/Model/BatchRegister500Response.php
@@ -92,8 +88,6 @@ test/Model/AuthenticateLogin401ResponseDataTest.php
 test/Model/AuthenticateLogin401ResponseTest.php
 test/Model/BalanceAudit200ResponseDataGlobalCheckTest.php
 test/Model/BalanceAudit200ResponseDataTest.php
-test/Model/BalanceAudit200ResponseDataUnbalancedTransactionsInnerBookingDateTest.php
-test/Model/BalanceAudit200ResponseDataUnbalancedTransactionsInnerDescriptionTest.php
 test/Model/BalanceAudit200ResponseDataUnbalancedTransactionsInnerTest.php
 test/Model/BalanceAudit200ResponseTest.php
 test/Model/BatchRegister200ResponseDataTest.php

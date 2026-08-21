@@ -2,7 +2,7 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Book2000App",
-        "version": "1.5.0"
+        "version": "1.5.1"
     },
     "servers": [
         {
@@ -152,9 +152,7 @@
                                                             "type": "boolean"
                                                         },
                                                         "difference_cents": {},
-                                                        "difference_euro": {
-                                                            "type": "string"
-                                                        }
+                                                        "difference_euro": {}
                                                     },
                                                     "required": [
                                                         "in_balance",
@@ -172,30 +170,10 @@
                                                                 "type": "string"
                                                             },
                                                             "description": {
-                                                                "anyOf": [
-                                                                    {
-                                                                        "type": "string"
-                                                                    },
-                                                                    {
-                                                                        "type": "string",
-                                                                        "enum": [
-                                                                            "Onbekende transactie"
-                                                                        ]
-                                                                    }
-                                                                ]
+                                                                "type": "string"
                                                             },
                                                             "booking_date": {
-                                                                "anyOf": [
-                                                                    {
-                                                                        "type": "string"
-                                                                    },
-                                                                    {
-                                                                        "type": "string",
-                                                                        "enum": [
-                                                                            "-"
-                                                                        ]
-                                                                    }
-                                                                ]
+                                                                "type": "string"
                                                             },
                                                             "imbalance_euro": {
                                                                 "type": "string"
@@ -666,10 +644,14 @@
                 "type": "object",
                 "description": "Class TransactionRegisterRequest",
                 "properties": {
-                    "description": {
+                    "title": {
                         "type": "string",
                         "description": "The financial transaction itself.",
-                        "maxLength": 1024
+                        "maxLength": 256
+                    },
+                    "description": {
+                        "type": "string",
+                        "maxLength": 2048
                     },
                     "booking_date": {
                         "type": "string",
@@ -871,6 +853,7 @@
                     }
                 },
                 "required": [
+                    "title",
                     "description",
                     "booking_date",
                     "journal_entries",
