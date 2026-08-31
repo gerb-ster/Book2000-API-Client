@@ -2,7 +2,7 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Book2000App",
-        "version": "1.5.2"
+        "version": "1.6.0"
     },
     "servers": [
         {
@@ -44,14 +44,14 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "const": "Unauthorised."
+                                            "const": "api.auth.login_failure"
                                         },
                                         "data": {
                                             "type": "object",
                                             "properties": {
                                                 "error": {
                                                     "type": "string",
-                                                    "const": "Unauthorised"
+                                                    "const": "unauthorised"
                                                 }
                                             },
                                             "required": [
@@ -83,7 +83,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "const": "User login successfully."
+                                            "const": "api.auth.login_success"
                                         }
                                     },
                                     "required": [
@@ -195,7 +195,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "const": "Balance Audit Result"
+                                            "const": "api.balance.audit_success"
                                         }
                                     },
                                     "required": [
@@ -242,16 +242,19 @@
                                             "type": "boolean"
                                         },
                                         "message": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "const": "api.batch.register_error"
                                         },
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                }
                                             },
-                                            "minItems": 0,
-                                            "maxItems": 0,
-                                            "additionalItems": false
+                                            "required": [
+                                                "message"
+                                            ]
                                         }
                                     },
                                     "required": [
@@ -286,7 +289,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "const": "Inkoopkosten succesvol geregistreerd op de Winst- en Verliesrekening."
+                                            "const": "api.batch.register_success"
                                         }
                                     },
                                     "required": [
@@ -326,7 +329,7 @@
                 },
                 "responses": {
                     "500": {
-                        "description": "Foutafhandeling als er iets misgaat (bijv. ontbrekende grootboeken)",
+                        "description": "",
                         "content": {
                             "application\/json": {
                                 "schema": {
@@ -336,16 +339,19 @@
                                             "type": "boolean"
                                         },
                                         "message": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "const": "api.sales.register_error"
                                         },
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                }
                                             },
-                                            "minItems": 0,
-                                            "maxItems": 0,
-                                            "additionalItems": false
+                                            "required": [
+                                                "message"
+                                            ]
                                         }
                                     },
                                     "required": [
@@ -384,7 +390,107 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "const": "Order succesvol geboekt in de administratie."
+                                            "const": "api.sales.register_success"
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "data",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    },
+                    "422": {
+                        "$ref": "#\/components\/responses\/ValidationException"
+                    }
+                }
+            }
+        },
+        "\/sales\/return": {
+            "post": {
+                "operationId": "sales.return",
+                "tags": [
+                    "Sales"
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application\/json": {
+                            "schema": {
+                                "$ref": "#\/components\/schemas\/SaleReturnRequest"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "500": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "const": "api.sales.return_error"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "message"
+                                            ]
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "message",
+                                        "data"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "object",
+                                            "properties": {
+                                                "invoice_id": {
+                                                    "type": "integer"
+                                                },
+                                                "invoice_number": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "required": [
+                                                "invoice_id",
+                                                "invoice_number"
+                                            ]
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "const": "api.sales.return_success"
                                         }
                                     },
                                     "required": [
@@ -434,16 +540,19 @@
                                             "type": "boolean"
                                         },
                                         "message": {
-                                            "type": "string"
+                                            "type": "string",
+                                            "const": "api.transaction.register_error"
                                         },
                                         "data": {
-                                            "type": "array",
-                                            "items": {
-                                                "type": "string"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                }
                                             },
-                                            "minItems": 0,
-                                            "maxItems": 0,
-                                            "additionalItems": false
+                                            "required": [
+                                                "message"
+                                            ]
                                         }
                                     },
                                     "required": [
@@ -486,7 +595,7 @@
                                         },
                                         "message": {
                                             "type": "string",
-                                            "const": "Transactie succesvol geregistreerd."
+                                            "const": "api.transaction.register_success"
                                         }
                                     },
                                     "required": [
@@ -639,6 +748,62 @@
                     "payment_method"
                 ],
                 "title": "SaleRegisterRequest"
+            },
+            "SaleReturnRequest": {
+                "type": "object",
+                "description": "Class RegisterRequest",
+                "properties": {
+                    "contact_id": {
+                        "type": "integer"
+                    },
+                    "credit_number": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "date": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "amount_cents": {
+                        "type": "integer",
+                        "minimum": 0
+                    },
+                    "description": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "platform": {
+                        "$ref": "#\/components\/schemas\/Platforms"
+                    },
+                    "customer_name": {
+                        "type": "string",
+                        "maxLength": 255
+                    },
+                    "customer_email": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "maxLength": 255
+                    },
+                    "customer_address": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "maxLength": 2048
+                    }
+                },
+                "required": [
+                    "contact_id",
+                    "credit_number",
+                    "date",
+                    "amount_cents",
+                    "description",
+                    "platform",
+                    "customer_name"
+                ],
+                "title": "SaleReturnRequest"
             },
             "TransactionRegisterRequest": {
                 "type": "object",
