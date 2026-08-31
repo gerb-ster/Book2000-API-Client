@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**contact_id** | **int** |  |
 **credit_number** | **string** |  |
 **date** | **\DateTime** |  |
 **amount_cents** | **int** |  |

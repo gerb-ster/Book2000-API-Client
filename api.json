@@ -2,7 +2,7 @@
     "openapi": "3.1.0",
     "info": {
         "title": "Book2000App",
-        "version": "1.6.0"
+        "version": "1.6.1"
     },
     "servers": [
         {
@@ -753,9 +753,6 @@
                 "type": "object",
                 "description": "Class RegisterRequest",
                 "properties": {
-                    "contact_id": {
-                        "type": "integer"
-                    },
                     "credit_number": {
                         "type": "string",
                         "maxLength": 255
@@ -795,7 +792,6 @@
                     }
                 },
                 "required": [
-                    "contact_id",
                     "credit_number",
                     "date",
                     "amount_cents",
