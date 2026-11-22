@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **gross_amount_cents** | **int** |  |
 **fee_cents** | **int** |  |
 **order_number** | **string** |  |
+**description** | **string** |  |
 **date** | **\DateTime** |  |
 **customer_name** | **string** |  |
 **customer_email** | **string** |  | [optional]

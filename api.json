@@ -310,6 +310,67 @@
                 }
             }
         },
+        "\/ledgers": {
+            "get": {
+                "operationId": "ledger.index",
+                "description": "The search term is matched against the ledger code, name, category, and RGS code.\nResults are sorted by ledger code.",
+                "summary": "List active ledger accounts, optionally filtered by a search term",
+                "tags": [
+                    "Ledger"
+                ],
+                "parameters": [
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "schema": {
+                            "type": [
+                                "string",
+                                "null"
+                            ],
+                            "maxLength": 255
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "",
+                        "content": {
+                            "application\/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "success": {
+                                            "type": "boolean"
+                                        },
+                                        "data": {
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#\/components\/schemas\/Ledger"
+                                            }
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "const": "api.ledgers.list_success"
+                                        }
+                                    },
+                                    "required": [
+                                        "success",
+                                        "data",
+                                        "message"
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "422": {
+                        "$ref": "#\/components\/responses\/ValidationException"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
+                    }
+                }
+            }
+        },
         "\/sales\/register": {
             "post": {
                 "operationId": "sales.register",
@@ -402,11 +463,11 @@
                             }
                         }
                     },
-                    "401": {
-                        "$ref": "#\/components\/responses\/AuthenticationException"
-                    },
                     "422": {
                         "$ref": "#\/components\/responses\/ValidationException"
+                    },
+                    "401": {
+                        "$ref": "#\/components\/responses\/AuthenticationException"
                     }
                 }
             }
@@ -463,6 +524,9 @@
                             }
                         }
                     },
+                    "422": {
+                        "$ref": "#\/components\/responses\/ValidationException"
+                    },
                     "200": {
                         "description": "",
                         "content": {
@@ -504,9 +568,6 @@
                     },
                     "401": {
                         "$ref": "#\/components\/responses\/AuthenticationException"
-                    },
-                    "422": {
-                        "$ref": "#\/components\/responses\/ValidationException"
                     }
                 }
             }
@@ -655,6 +716,104 @@
                 ],
                 "title": "BatchRegisterRequest"
             },
+            "Ledger": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "uuid": {
+                        "type": "string"
+                    },
+                    "code": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "type": {
+                        "type": "string"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "rgs_code": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "created_by": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
+                    },
+                    "updated_by": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
+                    },
+                    "deleted_by": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
+                    },
+                    "restored_by": {
+                        "type": [
+                            "integer",
+                            "null"
+                        ]
+                    },
+                    "restored_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ]
+                    },
+                    "deleted_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "created_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    },
+                    "updated_at": {
+                        "type": [
+                            "string",
+                            "null"
+                        ],
+                        "format": "date-time"
+                    }
+                },
+                "required": [
+                    "id",
+                    "uuid",
+                    "code",
+                    "name",
+                    "type",
+                    "category",
+                    "rgs_code",
+                    "created_by",
+                    "updated_by",
+                    "deleted_by",
+                    "restored_by",
+                    "restored_at",
+                    "deleted_at",
+                    "created_at",
+                    "updated_at"
+                ],
+                "title": "Ledger"
+            },
             "LoginRequest": {
                 "type": "object",
                 "description": "Class LoginRequest",
@@ -701,7 +860,7 @@
                     },
                     "gross_amount_cents": {
                         "type": "integer",
-                        "minimum": 0
+                        "minimum": 1
                     },
                     "fee_cents": {
                         "type": "integer",
@@ -710,6 +869,10 @@
                     "order_number": {
                         "type": "string",
                         "maxLength": 255
+                    },
+                    "description": {
+                        "type": "string",
+                        "maxLength": 1024
                     },
                     "date": {
                         "type": "string",
@@ -724,6 +887,7 @@
                             "string",
                             "null"
                         ],
+                        "format": "email",
                         "maxLength": 255
                     },
                     "customer_address": {
@@ -735,7 +899,12 @@
                     },
                     "payment_method": {
                         "type": "string",
-                        "maxLength": 255
+                        "enum": [
+                            "platform",
+                            "cash",
+                            "bank",
+                            "invoice"
+                        ]
                     }
                 },
                 "required": [
@@ -743,6 +912,7 @@
                     "gross_amount_cents",
                     "fee_cents",
                     "order_number",
+                    "description",
                     "date",
                     "customer_name",
                     "payment_method"
@@ -755,6 +925,10 @@
                 "properties": {
                     "credit_number": {
                         "type": "string",
+                        "maxLength": 25
+                    },
+                    "order_number": {
+                        "type": "string",
                         "maxLength": 255
                     },
                     "date": {
@@ -762,6 +936,10 @@
                         "format": "date-time"
                     },
                     "amount_cents": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "fee_refund_cents": {
                         "type": "integer",
                         "minimum": 0
                     },
@@ -772,6 +950,14 @@
                     "platform": {
                         "$ref": "#\/components\/schemas\/Platforms"
                     },
+                    "payment_method": {
+                        "type": "string",
+                        "enum": [
+                            "platform",
+                            "cash",
+                            "bank"
+                        ]
+                    },
                     "customer_name": {
                         "type": "string",
                         "maxLength": 255
@@ -781,6 +967,7 @@
                             "string",
                             "null"
                         ],
+                        "format": "email",
                         "maxLength": 255
                     },
                     "customer_address": {
@@ -793,6 +980,7 @@
                 },
                 "required": [
                     "credit_number",
+                    "order_number",
                     "date",
                     "amount_cents",
                     "description",

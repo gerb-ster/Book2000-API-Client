@@ -7,6 +7,7 @@ composer.json
 docs/Api/AuthenticateApi.md
 docs/Api/BalanceApi.md
 docs/Api/BatchApi.md
+docs/Api/LedgerApi.md
 docs/Api/SalesApi.md
 docs/Api/TransactionApi.md
 docs/Model/AuthenticateLogin200Response.md
@@ -23,6 +24,8 @@ docs/Model/BatchRegister500ResponseData.md
 docs/Model/BatchRegisterRequest.md
 docs/Model/InlineObject.md
 docs/Model/InlineObject1.md
+docs/Model/Ledger.md
+docs/Model/LedgerIndex200Response.md
 docs/Model/LoginRequest.md
 docs/Model/PaymentMethod.md
 docs/Model/Platforms.md
@@ -47,6 +50,7 @@ phpunit.xml.dist
 src/Api/AuthenticateApi.php
 src/Api/BalanceApi.php
 src/Api/BatchApi.php
+src/Api/LedgerApi.php
 src/Api/SalesApi.php
 src/Api/TransactionApi.php
 src/ApiException.php
@@ -67,6 +71,8 @@ src/Model/BatchRegister500ResponseData.php
 src/Model/BatchRegisterRequest.php
 src/Model/InlineObject.php
 src/Model/InlineObject1.php
+src/Model/Ledger.php
+src/Model/LedgerIndex200Response.php
 src/Model/LoginRequest.php
 src/Model/ModelInterface.php
 src/Model/PaymentMethod.php
@@ -91,6 +97,7 @@ src/ObjectSerializer.php
 test/Api/AuthenticateApiTest.php
 test/Api/BalanceApiTest.php
 test/Api/BatchApiTest.php
+test/Api/LedgerApiTest.php
 test/Api/SalesApiTest.php
 test/Api/TransactionApiTest.php
 test/Model/AuthenticateLogin200ResponseTest.php
@@ -107,6 +114,8 @@ test/Model/BatchRegister500ResponseTest.php
 test/Model/BatchRegisterRequestTest.php
 test/Model/InlineObject1Test.php
 test/Model/InlineObjectTest.php
+test/Model/LedgerIndex200ResponseTest.php
+test/Model/LedgerTest.php
 test/Model/LoginRequestTest.php
 test/Model/PaymentMethodTest.php
 test/Model/PlatformsTest.php
