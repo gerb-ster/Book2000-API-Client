@@ -1,5 +1,5 @@
 {
-    "openapi": "3.1.0",
+    "openapi": "3.1.2",
     "info": {
         "title": "Book2000App",
         "version": "1.6.2"
@@ -313,8 +313,8 @@
         "\/ledgers": {
             "get": {
                 "operationId": "ledger.index",
-                "description": "The search term is matched against the ledger code, name, category, and RGS code.\nResults are sorted by ledger code.",
-                "summary": "List active ledger accounts, optionally filtered by a search term",
+                "description": "The search term is matched against the ledger code, name, category, and RGS code.\nThe type filter accepts `debit` or `credit`. Results are sorted by ledger code.",
+                "summary": "List active ledger accounts, optionally filtered by a search term and ledger type",
                 "tags": [
                     "Ledger"
                 ],
@@ -328,6 +328,20 @@
                                 "null"
                             ],
                             "maxLength": 255
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#\/components\/schemas\/LedgerType"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
                         }
                     }
                 ],
@@ -425,7 +439,7 @@
                         }
                     },
                     "200": {
-                        "description": "5. Geef een succesvolle response terug met de gemaakte factuurgegevens",
+                        "description": "",
                         "content": {
                             "application\/json": {
                                 "schema": {
@@ -626,7 +640,7 @@
                         }
                     },
                     "200": {
-                        "description": "3. Return the created transaction.",
+                        "description": "",
                         "content": {
                             "application\/json": {
                                 "schema": {
@@ -813,6 +827,14 @@
                     "updated_at"
                 ],
                 "title": "Ledger"
+            },
+            "LedgerType": {
+                "type": "string",
+                "enum": [
+                    "debit",
+                    "credit"
+                ],
+                "title": "LedgerType"
             },
             "LoginRequest": {
                 "type": "object",
@@ -1037,7 +1059,10 @@
                         "minItems": 2
                     },
                     "invoice": {
-                        "type": "object",
+                        "type": [
+                            "object",
+                            "null"
+                        ],
                         "description": "An optional invoice with its items.",
                         "properties": {
                             "contact_id": {

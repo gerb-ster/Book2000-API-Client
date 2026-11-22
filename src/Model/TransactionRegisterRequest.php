@@ -90,7 +90,7 @@ class TransactionRegisterRequest implements ModelInterface, ArrayAccess, \JsonSe
         'description' => true,
         'booking_date' => false,
         'journal_entries' => false,
-        'invoice' => false
+        'invoice' => true
     ];
 
     /**
@@ -324,8 +324,8 @@ class TransactionRegisterRequest implements ModelInterface, ArrayAccess, \JsonSe
             $invalidProperties[] = "invalid value for 'journal_entries', number of items must be greater than or equal to 2.";
         }
 
-        if ($this->container['invoice'] === null) {
-            $invalidProperties[] = "'invoice' can't be null";
+        if ($this->container['invoice'] === null && !$this->isNullableSetToNull('invoice')) {
+            $invalidProperties[] = "'invoice' is required";
         }
         return $invalidProperties;
     }
@@ -472,7 +472,7 @@ class TransactionRegisterRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Gets invoice
      *
-     * @return \Book2000\ApiClient\Model\TransactionRegisterRequestInvoice
+     * @return \Book2000\ApiClient\Model\TransactionRegisterRequestInvoice|null
      */
     public function getInvoice()
     {
@@ -482,14 +482,21 @@ class TransactionRegisterRequest implements ModelInterface, ArrayAccess, \JsonSe
     /**
      * Sets invoice
      *
-     * @param \Book2000\ApiClient\Model\TransactionRegisterRequestInvoice $invoice invoice
+     * @param \Book2000\ApiClient\Model\TransactionRegisterRequestInvoice|null $invoice invoice
      *
      * @return self
      */
     public function setInvoice($invoice)
     {
         if (is_null($invoice)) {
-            throw new \InvalidArgumentException('non-nullable invoice cannot be null');
+            array_push($this->openAPINullablesSetToNull, 'invoice');
+        } else {
+            $nullablesSetToNull = $this->getOpenAPINullablesSetToNull();
+            $index = array_search('invoice', $nullablesSetToNull);
+            if ($index !== FALSE) {
+                unset($nullablesSetToNull[$index]);
+                $this->setOpenAPINullablesSetToNull($nullablesSetToNull);
+            }
         }
         $this->container['invoice'] = $invoice;
 

@@ -6,18 +6,18 @@ All URIs are relative to http://book2000.ootw.development/api, except if the ope
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**ledgerIndex()**](LedgerApi.md#ledgerIndex) | **GET** /ledgers | List active ledger accounts, optionally filtered by a search term |
+| [**ledgerIndex()**](LedgerApi.md#ledgerIndex) | **GET** /ledgers | List active ledger accounts, optionally filtered by a search term and ledger type |
 
 
 ## `ledgerIndex()`
 
 ```php
-ledgerIndex($search): \Book2000\ApiClient\Model\LedgerIndex200Response
+ledgerIndex($search, $type): \Book2000\ApiClient\Model\LedgerIndex200Response
 ```
 
-List active ledger accounts, optionally filtered by a search term
+List active ledger accounts, optionally filtered by a search term and ledger type
 
-The search term is matched against the ledger code, name, category, and RGS code. Results are sorted by ledger code.
+The search term is matched against the ledger code, name, category, and RGS code. The type filter accepts `debit` or `credit`. Results are sorted by ledger code.
 
 ### Example
 
@@ -37,9 +37,10 @@ $apiInstance = new Book2000\ApiClient\Api\LedgerApi(
     $config
 );
 $search = 'search_example'; // string
+$type = new \Book2000\ApiClient\Model\\Book2000ApiClientModelLedgerType(); // \Book2000ApiClientModelLedgerType
 
 try {
-    $result = $apiInstance->ledgerIndex($search);
+    $result = $apiInstance->ledgerIndex($search, $type);
     print_r($result);
 } catch (Exception $e) {
     echo 'Exception when calling LedgerApi->ledgerIndex: ', $e->getMessage(), PHP_EOL;
@@ -51,6 +52,7 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **search** | **string**|  | [optional] |
+| **type** | [**\Book2000ApiClientModelLedgerType**](../Model/.md)|  | [optional] |
 
 ### Return type
 

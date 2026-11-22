@@ -74,7 +74,7 @@ class LedgerApiTest extends TestCase
     /**
      * Test case for ledgerIndex
      *
-     * List active ledger accounts, optionally filtered by a search term.
+     * List active ledger accounts, optionally filtered by a search term and ledger type.
      *
      */
     public function testLedgerIndex()

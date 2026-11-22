@@ -26,6 +26,7 @@ docs/Model/InlineObject.md
 docs/Model/InlineObject1.md
 docs/Model/Ledger.md
 docs/Model/LedgerIndex200Response.md
+docs/Model/LedgerType.md
 docs/Model/LoginRequest.md
 docs/Model/PaymentMethod.md
 docs/Model/Platforms.md
@@ -73,6 +74,7 @@ src/Model/InlineObject.php
 src/Model/InlineObject1.php
 src/Model/Ledger.php
 src/Model/LedgerIndex200Response.php
+src/Model/LedgerType.php
 src/Model/LoginRequest.php
 src/Model/ModelInterface.php
 src/Model/PaymentMethod.php
@@ -116,6 +118,7 @@ test/Model/InlineObject1Test.php
 test/Model/InlineObjectTest.php
 test/Model/LedgerIndex200ResponseTest.php
 test/Model/LedgerTest.php
+test/Model/LedgerTypeTest.php
 test/Model/LoginRequestTest.php
 test/Model/PaymentMethodTest.php
 test/Model/PlatformsTest.php
