@@ -313,7 +313,7 @@
         "\/ledgers": {
             "get": {
                 "operationId": "ledger.index",
-                "description": "The search term is matched against the ledger code, name, category, and RGS code.\nThe type filter accepts `debit` or `credit`. Results are sorted by ledger code.",
+                "description": "The search term is matched against the ledger code, name, category, and RGS code.\nThe type filter accepts `debit` or `credit`; the category filter accepts `balance` or `profit_loss`.\nResults are sorted by ledger code.",
                 "summary": "List active ledger accounts, optionally filtered by a search term and ledger type",
                 "tags": [
                     "Ledger"
@@ -337,6 +337,20 @@
                             "anyOf": [
                                 {
                                     "$ref": "#\/components\/schemas\/LedgerType"
+                                },
+                                {
+                                    "type": "null"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "name": "category",
+                        "in": "query",
+                        "schema": {
+                            "anyOf": [
+                                {
+                                    "$ref": "#\/components\/schemas\/LedgerCategory"
                                 },
                                 {
                                     "type": "null"
@@ -827,6 +841,14 @@
                     "updated_at"
                 ],
                 "title": "Ledger"
+            },
+            "LedgerCategory": {
+                "type": "string",
+                "enum": [
+                    "balance",
+                    "profit_loss"
+                ],
+                "title": "LedgerCategory"
             },
             "LedgerType": {
                 "type": "string",

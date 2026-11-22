@@ -132,15 +132,16 @@ class LedgerApi
      *
      * @param  string|null $search search (optional)
      * @param  \Book2000ApiClientModelLedgerType|null $type type (optional)
+     * @param  \Book2000ApiClientModelLedgerCategory|null $category category (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['ledgerIndex'] to see the possible values for this operation
      *
      * @throws \Book2000\ApiClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return \Book2000\ApiClient\Model\LedgerIndex200Response|\Book2000\ApiClient\Model\InlineObject|\Book2000\ApiClient\Model\InlineObject1
      */
-    public function ledgerIndex($search = null, $type = null, string $contentType = self::contentTypes['ledgerIndex'][0])
+    public function ledgerIndex($search = null, $type = null, $category = null, string $contentType = self::contentTypes['ledgerIndex'][0])
     {
-        list($response) = $this->ledgerIndexWithHttpInfo($search, $type, $contentType);
+        list($response) = $this->ledgerIndexWithHttpInfo($search, $type, $category, $contentType);
         return $response;
     }
 
@@ -151,15 +152,16 @@ class LedgerApi
      *
      * @param  string|null $search (optional)
      * @param  \Book2000ApiClientModelLedgerType|null $type (optional)
+     * @param  \Book2000ApiClientModelLedgerCategory|null $category (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['ledgerIndex'] to see the possible values for this operation
      *
      * @throws \Book2000\ApiClient\ApiException on non-2xx response or if the response body is not in the expected format
      * @throws \InvalidArgumentException
      * @return array of \Book2000\ApiClient\Model\LedgerIndex200Response|\Book2000\ApiClient\Model\InlineObject|\Book2000\ApiClient\Model\InlineObject1, HTTP status code, HTTP response headers (array of strings)
      */
-    public function ledgerIndexWithHttpInfo($search = null, $type = null, string $contentType = self::contentTypes['ledgerIndex'][0])
+    public function ledgerIndexWithHttpInfo($search = null, $type = null, $category = null, string $contentType = self::contentTypes['ledgerIndex'][0])
     {
-        $request = $this->ledgerIndexRequest($search, $type, $contentType);
+        $request = $this->ledgerIndexRequest($search, $type, $category, $contentType);
 
         try {
             $options = $this->createHttpClientOption();
@@ -266,14 +268,15 @@ class LedgerApi
      *
      * @param  string|null $search (optional)
      * @param  \Book2000ApiClientModelLedgerType|null $type (optional)
+     * @param  \Book2000ApiClientModelLedgerCategory|null $category (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['ledgerIndex'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function ledgerIndexAsync($search = null, $type = null, string $contentType = self::contentTypes['ledgerIndex'][0])
+    public function ledgerIndexAsync($search = null, $type = null, $category = null, string $contentType = self::contentTypes['ledgerIndex'][0])
     {
-        return $this->ledgerIndexAsyncWithHttpInfo($search, $type, $contentType)
+        return $this->ledgerIndexAsyncWithHttpInfo($search, $type, $category, $contentType)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -288,15 +291,16 @@ class LedgerApi
      *
      * @param  string|null $search (optional)
      * @param  \Book2000ApiClientModelLedgerType|null $type (optional)
+     * @param  \Book2000ApiClientModelLedgerCategory|null $category (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['ledgerIndex'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function ledgerIndexAsyncWithHttpInfo($search = null, $type = null, string $contentType = self::contentTypes['ledgerIndex'][0])
+    public function ledgerIndexAsyncWithHttpInfo($search = null, $type = null, $category = null, string $contentType = self::contentTypes['ledgerIndex'][0])
     {
         $returnType = '\Book2000\ApiClient\Model\LedgerIndex200Response';
-        $request = $this->ledgerIndexRequest($search, $type, $contentType);
+        $request = $this->ledgerIndexRequest($search, $type, $category, $contentType);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -347,18 +351,20 @@ class LedgerApi
      *
      * @param  string|null $search (optional)
      * @param  \Book2000ApiClientModelLedgerType|null $type (optional)
+     * @param  \Book2000ApiClientModelLedgerCategory|null $category (optional)
      * @param  string $contentType The value for the Content-Type header. Check self::contentTypes['ledgerIndex'] to see the possible values for this operation
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    public function ledgerIndexRequest($search = null, $type = null, string $contentType = self::contentTypes['ledgerIndex'][0])
+    public function ledgerIndexRequest($search = null, $type = null, $category = null, string $contentType = self::contentTypes['ledgerIndex'][0])
     {
 
         if ($search !== null && strlen($search) > 255) {
             throw new \InvalidArgumentException('invalid length for "$search" when calling LedgerApi.ledgerIndex, must be smaller than or equal to 255.');
         }
         
+
 
 
         $resourcePath = '/ledgers';
@@ -382,6 +388,15 @@ class LedgerApi
             $type,
             'type', // param base name
             'LedgerType', // openApiType
+            'form', // style
+            true, // explode
+            false // required
+        ) ?? []);
+        // query params
+        $queryParams = array_merge($queryParams, ObjectSerializer::toQueryValue(
+            $category,
+            'category', // param base name
+            'LedgerCategory', // openApiType
             'form', // style
             true, // explode
             false // required

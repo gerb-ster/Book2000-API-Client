@@ -25,6 +25,7 @@ docs/Model/BatchRegisterRequest.md
 docs/Model/InlineObject.md
 docs/Model/InlineObject1.md
 docs/Model/Ledger.md
+docs/Model/LedgerCategory.md
 docs/Model/LedgerIndex200Response.md
 docs/Model/LedgerType.md
 docs/Model/LoginRequest.md
@@ -73,6 +74,7 @@ src/Model/BatchRegisterRequest.php
 src/Model/InlineObject.php
 src/Model/InlineObject1.php
 src/Model/Ledger.php
+src/Model/LedgerCategory.php
 src/Model/LedgerIndex200Response.php
 src/Model/LedgerType.php
 src/Model/LoginRequest.php
@@ -116,6 +118,7 @@ test/Model/BatchRegister500ResponseTest.php
 test/Model/BatchRegisterRequestTest.php
 test/Model/InlineObject1Test.php
 test/Model/InlineObjectTest.php
+test/Model/LedgerCategoryTest.php
 test/Model/LedgerIndex200ResponseTest.php
 test/Model/LedgerTest.php
 test/Model/LedgerTypeTest.php
